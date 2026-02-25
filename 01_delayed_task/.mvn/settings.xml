@@ -1,0 +1,123 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="
+          http://maven.apache.org/SETTINGS/1.0.0
+          https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+
+<!-- 每个项目独立仓库（推荐） -->
+    <localRepository>.mvn/repository</localRepository>
+
+
+    <!-- 镜像配置 -->
+    <mirrors>
+
+        <!-- 阿里云镜像（主镜像） -->
+        <mirror>
+            <id>aliyun</id>
+            <name>Aliyun Public Mirror</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <mirrorOf>central</mirrorOf>
+        </mirror>
+
+        <!-- 阿里云插件镜像 -->
+        <mirror>
+            <id>aliyun-plugin</id>
+            <name>Aliyun Plugin Mirror</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <mirrorOf>plugins</mirrorOf>
+        </mirror>
+
+    </mirrors>
+
+
+    <!-- 激活 profile -->
+    <profiles>
+
+        <profile>
+            <id>default</id>
+
+            <repositories>
+
+                <!-- Maven Central -->
+                <repository>
+                    <id>central</id>
+                    <name>Maven Central</name>
+                    <url>https://repo.maven.apache.org/maven2</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+
+                <!-- 阿里云备用 -->
+                <repository>
+                    <id>aliyun</id>
+                    <name>Aliyun</name>
+                    <url>https://maven.aliyun.com/repository/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                </repository>
+
+            </repositories>
+
+
+            <pluginRepositories>
+
+                <pluginRepository>
+                    <id>central</id>
+                    <url>https://repo.maven.apache.org/maven2</url>
+                </pluginRepository>
+
+                <pluginRepository>
+                    <id>aliyun</id>
+                    <url>https://maven.aliyun.com/repository/public</url>
+                </pluginRepository>
+
+            </pluginRepositories>
+
+        </profile>
+
+    </profiles>
+
+
+    <!-- 激活 -->
+    <activeProfiles>
+        <activeProfile>default</activeProfile>
+    </activeProfiles>
+
+
+    <!-- 私服配置（可选） -->
+    <!--
+    <servers>
+
+        <server>
+            <id>nexus</id>
+            <username>your-username</username>
+            <password>your-password</password>
+        </server>
+
+    </servers>
+    -->
+
+
+    <!-- 代理（如果需要） -->
+    <!--
+    <proxies>
+
+        <proxy>
+            <id>http-proxy</id>
+            <active>true</active>
+            <protocol>http</protocol>
+            <host>127.0.0.1</host>
+            <port>7890</port>
+        </proxy>
+
+    </proxies>
+    -->
+
+
+</settings>

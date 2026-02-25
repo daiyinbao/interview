@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Feb 24 15:05:59 CST 2026
+httpcore-4.0.1.jar>company-nexus=
+httpcore-4.0.1.pom>company-nexus=
