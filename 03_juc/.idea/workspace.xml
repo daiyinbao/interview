@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="757478e5-5c27-4af3-bc0f-898148414d49" name="Changes" comment="xiaoyaoxian:juc_interview commit" />
+    <list default="true" id="757478e5-5c27-4af3-bc0f-898148414d49" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,9 +32,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../05_acync_task" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.completion" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.TaskIdGeneratorTest.shouldGenerateUniqueIdsConcurrently">
     <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="scheduler.Demo" />
       <module name="task-scheduler" />
@@ -46,8 +49,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TaskIdGeneratorTest.shouldGenerateUniqueIdsConcurrently" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="task-scheduler" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="scheduler.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="scheduler" />
+      <option name="MAIN_CLASS_NAME" value="scheduler.TaskIdGeneratorTest" />
+      <option name="METHOD_NAME" value="shouldGenerateUniqueIdsConcurrently" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TaskIdGeneratorTest.shouldGenerateUniqueIdsConcurrently" />
         <item itemvalue="Application.Demo" />
       </list>
     </recent_temporary>
@@ -62,7 +82,7 @@
       <updated>1772445088853</updated>
       <workItem from="1772445091387" duration="862000" />
       <workItem from="1772454279701" duration="1558000" />
-      <workItem from="1772502033190" duration="1095000" />
+      <workItem from="1772502033190" duration="4518000" />
     </task>
     <task id="LOCAL-00001" summary="xiaoyaoxian:juc_interview commit">
       <created>1772502676876</created>
@@ -71,7 +91,14 @@
       <option name="project" value="LOCAL" />
       <updated>1772502676876</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="xiaoyaoxian:alter config">
+      <created>1772503378174</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1772503378174</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -79,6 +106,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="xiaoyaoxian:juc_interview commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="xiaoyaoxian:juc_interview commit" />
+    <MESSAGE value="xiaoyaoxian:alter config" />
+    <option name="LAST_COMMIT_MESSAGE" value="xiaoyaoxian:alter config" />
   </component>
 </project>
