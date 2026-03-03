@@ -4,42 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="757478e5-5c27-4af3-bc0f-898148414d49" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/Demo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/Task.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/TaskIdGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/TaskQueue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/TaskResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/TaskScheduler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/TaskState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/Worker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/scheduler/TaskIdGeneratorTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/scheduler/TaskSchedulerRetryTimeoutTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/scheduler/TaskSchedulerSuccessTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/Demo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/Task.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/TaskIdGenerator.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/TaskQueue.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/TaskResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/TaskScheduler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/TaskState.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/Worker.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/scheduler/TaskIdGeneratorTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/scheduler/TaskSchedulerRetryTimeoutTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/scheduler/TaskSchedulerSuccessTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../02_bitset/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../02_bitset/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../02_bitset/StreamDedupSystemNio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../02_bitset/StreamDedupSystemNio.java" afterDir="false" />
-    </list>
+    <list default="true" id="757478e5-5c27-4af3-bc0f-898148414d49" name="Changes" comment="xiaoyaoxian:juc_interview commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,11 +62,23 @@
       <updated>1772445088853</updated>
       <workItem from="1772445091387" duration="862000" />
       <workItem from="1772454279701" duration="1558000" />
-      <workItem from="1772502033190" duration="569000" />
+      <workItem from="1772502033190" duration="1095000" />
     </task>
+    <task id="LOCAL-00001" summary="xiaoyaoxian:juc_interview commit">
+      <created>1772502676876</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1772502676876</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="xiaoyaoxian:juc_interview commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="xiaoyaoxian:juc_interview commit" />
   </component>
 </project>
