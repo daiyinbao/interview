@@ -177,6 +177,7 @@ public class StreamDedupSystemNio {
             int digit = (int) (v % 10);
             buf.put(pos - i, (byte) ('0' + digit));
             v /= 10;
+
         }
         buf.position(buf.position() + len);
     }

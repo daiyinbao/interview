@@ -35,3 +35,4 @@ javac UserSignInSystem.java
 
 - `StreamDedupSystemNio` 只接受 `[0, 1_000_000_000]` 范围内的整数，非法行会被忽略并计数。
 - `UserSignInSystem` 使用固定文件格式，初始化时会创建/校验文件头。
+

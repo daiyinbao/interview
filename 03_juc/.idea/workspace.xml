@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="757478e5-5c27-4af3-bc0f-898148414d49" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/Demo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/Task.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/TaskIdGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/TaskQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/TaskResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/TaskScheduler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/TaskState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/scheduler/Worker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/scheduler/TaskIdGeneratorTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/scheduler/TaskSchedulerRetryTimeoutTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/scheduler/TaskSchedulerSuccessTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/Demo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/Task.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/TaskIdGenerator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/TaskQueue.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/TaskResult.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/TaskScheduler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/TaskState.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/scheduler/Worker.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/scheduler/TaskIdGeneratorTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/scheduler/TaskSchedulerRetryTimeoutTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/scheduler/TaskSchedulerSuccessTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02_bitset/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../02_bitset/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02_bitset/StreamDedupSystemNio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../02_bitset/StreamDedupSystemNio.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/java_files/maven/apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="D:\java_files\maven\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="3ANtu6naF1Hgg6XZl41WKkKsip9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.completion" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="scheduler.Demo" />
+      <module name="task-scheduler" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="scheduler.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Demo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="757478e5-5c27-4af3-bc0f-898148414d49" name="Changes" comment="" />
+      <created>1772445088853</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1772445088853</updated>
+      <workItem from="1772445091387" duration="862000" />
+      <workItem from="1772454279701" duration="1558000" />
+      <workItem from="1772502033190" duration="569000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
