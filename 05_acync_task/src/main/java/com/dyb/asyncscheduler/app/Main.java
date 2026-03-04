@@ -40,7 +40,7 @@ public final class Main {
             ids.add(id);
 
             //添加任务
-            Task t = new Task(id, "demo", "{}", "idem-" + id, "shard-0");
+            Task t = new Task(id, "demo", "{}", "idem-" + id, "shard-0",null);
             store.insert(t);
             DebugLog.log("Main inserted taskId=%s state=%s", id, store.get(id).orElseThrow(() -> new IllegalStateException("task missing: " + id)).state);
 

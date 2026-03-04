@@ -43,8 +43,11 @@ public final class Task {
     //上次执行失败原因
     public volatile String lastError;
 
+    //任务重试策略
+    public  final RetryPolicy retryPolicy;
 
-    public Task(String taskId, String type, String payloadJson, String idempotencyKey, String shard) {
+
+    public Task(String taskId, String type, String payloadJson, String idempotencyKey, String shard,RetryPolicy retryPolicy) {
         this.taskId = taskId;
         this.type = type;
         this.payloadJson = payloadJson;
@@ -63,5 +66,7 @@ public final class Task {
         this.leaseUntilEpochMs = 0L;
 
         this.lastError = null;
+
+        this.retryPolicy =retryPolicy;
     }
 }
