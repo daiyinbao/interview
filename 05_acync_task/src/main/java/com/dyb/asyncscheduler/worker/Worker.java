@@ -7,6 +7,7 @@ package com.dyb.asyncscheduler.worker;
 
 import com.dyb.asyncscheduler.queue.TaskQueue;
 import com.dyb.asyncscheduler.store.TaskStore;
+import com.dyb.asyncscheduler.util.DebugLog;
 
 import java.util.Objects;
 import java.util.concurrent.Executor;
@@ -47,20 +48,25 @@ public final class Worker implements Runnable{
 
     @Override
     public void run() {
+        DebugLog.log("Worker start workerId=%s leaseTtlMs=%d", workerId, leaseTtlMs);
         while (!stopped && !Thread.currentThread().isInterrupted()) {
             try {
                 state = WorkerState.IDLE;
                 String taskId = queue.take();
+                DebugLog.log("Worker take taskId=%s queueSize=%d", taskId, queue.size());
 
                 long now = System.currentTimeMillis();
                 state = WorkerState.RESERVED;
-                if (!store.tryLease(taskId, workerId, now, leaseTtlMs)) {
+                boolean leased = store.tryLease(taskId, workerId, now, leaseTtlMs);
+                DebugLog.log("Worker tryLease taskId=%s leased=%s", taskId, leased);
+                if (!leased) {
                     state = WorkerState.BACKOFF;
                     Thread.sleep(10L);
                     continue;
                 }
 
                 state = WorkerState.SUBMITTED;
+                DebugLog.log("Worker submit TaskRunner taskId=%s", taskId);
                 executor.execute(new TaskRunner(taskId, store, workerId));
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
@@ -68,6 +74,7 @@ public final class Worker implements Runnable{
             } catch (RejectedExecutionException ree) {
                 // Step 7 会把这里升级成“拒绝闭环”；Step 1 先保证 lease 不悬挂
                 state = WorkerState.BACKOFF;
+                DebugLog.log("Worker rejected by executor; backoff");
                 try {
                     Thread.sleep(50L);
                 } catch (InterruptedException ie) {
@@ -76,6 +83,7 @@ public final class Worker implements Runnable{
                 }
             } catch (Exception ex) {
                 state = WorkerState.UNHEALTHY;
+                DebugLog.log("Worker exception=%s", ex.toString());
                 try {
                     Thread.sleep(50L);
                 } catch (InterruptedException ie) {
@@ -85,5 +93,6 @@ public final class Worker implements Runnable{
             }
         }
         state = WorkerState.STOPPED;
+        DebugLog.log("Worker stopped workerId=%s", workerId);
     }
 }

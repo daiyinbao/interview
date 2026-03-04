@@ -8,6 +8,7 @@ package com.dyb.asyncscheduler.store;
 import com.dyb.asyncscheduler.task.EnqueueState;
 import com.dyb.asyncscheduler.task.Task;
 import com.dyb.asyncscheduler.task.TaskState;
+import com.dyb.asyncscheduler.util.DebugLog;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -26,15 +27,19 @@ public  final class InMemoryTaskStore implements TaskStore{
     @Override
     public void insert(Task task) {
         Objects.requireNonNull(task,"task");
+        DebugLog.log("Store insert taskId=%s state(before)=%s", task.getTaskId(), task.state);
         //添加任务，如果该id之前存在则返回并覆盖旧任务
         Task prev = tasks.put(task.getTaskId(), task);
         if(prev !=null){
             //重复任务id
             throw new IllegalStateException("duplicate taskId");
         }
-        task.state=TaskState.NEW;
+        // 该项目当前版本没有单独的 Scheduler 去推进 NEW -> READY。
+        // 如果仍停留在 NEW，Worker.tryLease() 只接受 READY/RETRY，会导致任务永远无法执行。
+        task.state=TaskState.READY;
         //默认设置立即可执行
         task.nextRunAtEpochMs=0L;
+        DebugLog.log("Store insert done taskId=%s state(after)=%s nextRunAt=%d", task.getTaskId(), task.state, task.nextRunAtEpochMs);
 
     }
 
@@ -54,22 +59,38 @@ public  final class InMemoryTaskStore implements TaskStore{
     @Override
     public boolean tryLease(String taskId, String owner, long nowMs, long ttlMs) {
         Task t = tasks.get(taskId);
+        DebugLog.log("Store tryLease enter taskId=%s owner=%s now=%d ttl=%d", taskId, owner, nowMs, ttlMs);
         if(t == null){
+            DebugLog.log("Store tryLease missing taskId=%s", taskId);
             return false;
         }
 
         synchronized (t){
+            DebugLog.log("Store tryLease check taskId=%s state=%s nextRunAt=%d leaseOwner=%s leaseUntil=%d",
+                    taskId, t.state, t.nextRunAtEpochMs, t.leaseOwner, t.leaseUntilEpochMs);
             //如果任务不能被调度
-            if(!(t.state == TaskState.READY || t.state == TaskState.RETRY)) return false;
+            if(!(t.state == TaskState.READY || t.state == TaskState.RETRY)) {
+                DebugLog.log("Store tryLease reject taskId=%s reason=state state=%s", taskId, t.state);
+                return false;
+            }
             //未到执行时间
-            if(t.nextRunAtEpochMs > nowMs) return  false;
+            if(t.nextRunAtEpochMs > nowMs) {
+                DebugLog.log("Store tryLease reject taskId=%s reason=not_due nextRunAt=%d now=%d", taskId, t.nextRunAtEpochMs, nowMs);
+                return false;
+            }
             //期权仍合法
-            if(t.leaseOwner != null && t.leaseUntilEpochMs >nowMs) return false;
+            if(t.leaseOwner != null && t.leaseUntilEpochMs >nowMs) {
+                DebugLog.log("Store tryLease reject taskId=%s reason=leased leaseOwner=%s leaseUntil=%d now=%d",
+                        taskId, t.leaseOwner, t.leaseUntilEpochMs, nowMs);
+                return false;
+            }
             t.attempt +=1;
             //已派发
             t.state= TaskState.DISPATCHED;
             t.leaseOwner = owner;
             t.leaseUntilEpochMs = nowMs + ttlMs;
+            DebugLog.log("Store tryLease success taskId=%s newState=%s leaseOwner=%s leaseUntil=%d attempt=%d",
+                    taskId, t.state, t.leaseOwner, t.leaseUntilEpochMs, t.attempt);
             return true;
         }
 
@@ -84,11 +105,18 @@ public  final class InMemoryTaskStore implements TaskStore{
     @Override
     public boolean markRunning(String taskId, TaskState expectedState) {
         Task t = tasks.get(taskId);
-        if(t == null) return false;
+        if(t == null) {
+            DebugLog.log("Store markRunning missing taskId=%s expected=%s", taskId, expectedState);
+            return false;
+        }
         synchronized (t){
             //当状态是我认为的那个状态时，才允许修改
-            if (t.state != expectedState) return false;
+            if (t.state != expectedState) {
+                DebugLog.log("Store markRunning reject taskId=%s expected=%s actual=%s", taskId, expectedState, t.state);
+                return false;
+            }
             t.state = TaskState.RUNNING;
+            DebugLog.log("Store markRunning success taskId=%s newState=%s", taskId, t.state);
             return true;
         }
     }
@@ -100,7 +128,10 @@ public  final class InMemoryTaskStore implements TaskStore{
     @Override
     public void completeSuccess(String taskId) {
         Task t = tasks.get(taskId);
-        if(t ==null) return;
+        if(t ==null) {
+            DebugLog.log("Store completeSuccess missing taskId=%s", taskId);
+            return;
+        }
         synchronized(t){
             t.state = TaskState.SUCCESS;
             t.lastError = null;
@@ -108,6 +139,7 @@ public  final class InMemoryTaskStore implements TaskStore{
             //修改入队状态
             t.enqueueState= EnqueueState.NONE;
             t.enqueueUntilEpochMs = 0L;
+            DebugLog.log("Store completeSuccess taskId=%s newState=%s", taskId, t.state);
         }
 
     }
@@ -122,7 +154,10 @@ public  final class InMemoryTaskStore implements TaskStore{
     @Override
     public void completeFailure(String taskId, String error, boolean retryable, long nextRunAtEpochMs) {
         Task t = tasks.get(taskId);
-        if (t == null) return;
+        if (t == null) {
+            DebugLog.log("Store completeFailure missing taskId=%s", taskId);
+            return;
+        }
         synchronized(t){
             t.lastError = error;
             t.state = TaskState.FAILED;
@@ -138,6 +173,8 @@ public  final class InMemoryTaskStore implements TaskStore{
             //都是未入队状态
             t.enqueueState = EnqueueState.NONE;
             t.enqueueUntilEpochMs = 0L;
+            DebugLog.log("Store completeFailure taskId=%s newState=%s attempt=%d maxAttempts=%d nextRunAt=%d error=%s",
+                    taskId, t.state, t.attempt, t.maxAttempts, t.nextRunAtEpochMs, t.lastError);
         }
     }
 
@@ -149,10 +186,17 @@ public  final class InMemoryTaskStore implements TaskStore{
     @Override
     public void releaseLease(String taskId, String owner) {
         Task t = tasks.get(taskId);
-        if (t == null) return;
+        if (t == null) {
+            DebugLog.log("Store releaseLease missing taskId=%s owner=%s", taskId, owner);
+            return;
+        }
         synchronized(t){
+            DebugLog.log("Store releaseLease taskId=%s owner(param)=%s leaseOwner(before)=%s leaseUntil(before)=%d",
+                    taskId, owner, t.leaseOwner, t.leaseUntilEpochMs);
             t.leaseOwner = null;
             t.leaseUntilEpochMs=0L;
+            DebugLog.log("Store releaseLease done taskId=%s leaseOwner(after)=%s leaseUntil(after)=%d",
+                    taskId, t.leaseOwner, t.leaseUntilEpochMs);
         }
     }
 }
