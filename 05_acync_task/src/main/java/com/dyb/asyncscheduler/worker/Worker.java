@@ -52,11 +52,13 @@ public final class Worker implements Runnable{
         while (!stopped && !Thread.currentThread().isInterrupted()) {
             try {
                 state = WorkerState.IDLE;
+                //一直监听，当queue里面有任务开始执行
                 String taskId = queue.take();
                 DebugLog.log("Worker take taskId=%s queueSize=%d", taskId, queue.size());
 
                 long now = System.currentTimeMillis();
                 state = WorkerState.RESERVED;
+                //获取期权
                 boolean leased = store.tryLease(taskId, workerId, now, leaseTtlMs);
                 DebugLog.log("Worker tryLease taskId=%s leased=%s", taskId, leased);
                 if (!leased) {
@@ -67,6 +69,7 @@ public final class Worker implements Runnable{
 
                 state = WorkerState.SUBMITTED;
                 DebugLog.log("Worker submit TaskRunner taskId=%s", taskId);
+                //真正开始执行任务
                 executor.execute(new TaskRunner(taskId, store, workerId));
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();

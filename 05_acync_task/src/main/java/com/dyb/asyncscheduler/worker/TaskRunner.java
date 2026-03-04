@@ -28,6 +28,7 @@ public final class TaskRunner implements Runnable{
     @Override
     public void run() {
         DebugLog.log("TaskRunner start taskId=%s owner=%s", taskId, owner);
+        //标记任务
         boolean runningMarked = store.markRunning(taskId, TaskState.DISPATCHED);
         DebugLog.log("TaskRunner markRunning taskId=%s ok=%s expected=%s", taskId, runningMarked, TaskState.DISPATCHED);
         if(!runningMarked){
@@ -46,6 +47,7 @@ public final class TaskRunner implements Runnable{
             store.completeFailure(taskId, ex.getMessage(), true, nextRunAt);
             DebugLog.log("TaskRunner completeFailure taskId=%s error=%s nextRunAt=%d", taskId, ex.getMessage(), nextRunAt);
         } finally {
+            //释放期权
             store.releaseLease(taskId, owner);
             DebugLog.log("TaskRunner releaseLease taskId=%s owner=%s", taskId, owner);
         }

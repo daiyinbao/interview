@@ -25,8 +25,10 @@ public final class Main {
         TaskStore store = new InMemoryTaskStore();
         TaskQueue queue = new InMemoryTaskQueue(64);
 
+        //创建线程池，等待queue任务
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
 
+        //worker线程开启，一直监听queue
         Worker worker = new Worker("worker-1", store, queue, executor, 5000L);
         Thread workerThread = new Thread(worker, "worker-1");
         workerThread.start();
@@ -37,10 +39,12 @@ public final class Main {
             String id = UUID.randomUUID().toString();
             ids.add(id);
 
+            //添加任务
             Task t = new Task(id, "demo", "{}", "idem-" + id, "shard-0");
             store.insert(t);
             DebugLog.log("Main inserted taskId=%s state=%s", id, store.get(id).orElseThrow(() -> new IllegalStateException("task missing: " + id)).state);
 
+            //将任务添加到ready queue
             boolean offered = queue.offer(id);
             DebugLog.log("Main offered taskId=%s offered=%s queueSize=%d", id, offered, queue.size());
             if (!offered) {
