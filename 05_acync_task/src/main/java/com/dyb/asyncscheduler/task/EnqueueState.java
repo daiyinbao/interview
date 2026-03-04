@@ -6,6 +6,6 @@
 package com.dyb.asyncscheduler.task;
 
 public enum EnqueueState {
-    NONE,
-    ENQUEUED
+    NONE, // 没有入队
+    ENQUEUED // 已经入队
 }
