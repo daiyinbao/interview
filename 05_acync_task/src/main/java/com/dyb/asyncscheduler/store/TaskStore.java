@@ -20,7 +20,7 @@ public interface TaskStore {
     //查询任务
     Optional<Task> get(String taskId);
 
-    //保证同一时间只有一个 worker 能执行任务
+    //保证同一时间只有一个 worker 能执行任务,崩溃恢复
     boolean tryLease(String taskId, String owner,long nowMs,long ttlMs);
 
     //推进状态

@@ -1,8 +1,11 @@
 package com.dyb.asyncscheduler.task;
 
+import lombok.Data;
+
 /**
  * 执行任务实例
  */
+@Data
 public final class Task {
     //任务的唯一标识
     private final String taskId;
@@ -24,6 +27,7 @@ public final class Task {
     public volatile int  maxAttempts;
 
     //调度时间控制-->延迟时间，超过该时间 则不会调度
+    //任务在这个时间点之前，不能被调度执行
     public volatile long nextRunAtEpochMs;
 
     //防止scheduler把同一个任务重复放进readyQueue
