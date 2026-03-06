@@ -34,6 +34,16 @@ public  final class InMemoryTaskQueue implements TaskQueue{
         return q.offer(taskId);
     }
 
+    @Override
+    public boolean offer(String taskId, long nextRunAtEpochMs) {
+        return false;
+    }
+
+    @Override
+    public boolean offer(String taskId, long nextRunAtEpochMs, long timeoutMs) throws InterruptedException {
+        return false;
+    }
+
     /**
      * 从队列中取任务
      * @return
@@ -44,21 +54,24 @@ public  final class InMemoryTaskQueue implements TaskQueue{
         return q.take();
     }
 
-    /**
-     * 队列里的任务个数
-     * @return
-     */
     @Override
-    public int size() {
-        return q.size();
+    public int readySize() {
+        return 0;
     }
 
-    /**
-     * 总容量
-     * @return
-     */
     @Override
-    public int capacity() {
-        return q.remainingCapacity() + q.size();
+    public int readyCapacity() {
+        return 0;
     }
+
+    @Override
+    public int delaySize() {
+        return 0;
+    }
+
+    @Override
+    public void shutdown() {
+
+    }
+
 }
