@@ -7,6 +7,7 @@ package com.dyb.asyncscheduler.worker;
 
 import com.dyb.asyncscheduler.queue.TaskQueue;
 import com.dyb.asyncscheduler.store.TaskStore;
+import com.dyb.asyncscheduler.task.HandlerRegistry;
 import com.dyb.asyncscheduler.util.DebugLog;
 
 import java.util.Objects;
@@ -23,18 +24,20 @@ public final class Worker implements Runnable{
     private final TaskStore store;
     private final TaskQueue queue;
     private final Executor executor;
+    private final HandlerRegistry registry;
 
     private final long leaseTtlMs;
 
     private volatile boolean stopped;
     private volatile WorkerState state = WorkerState.IDLE;
 
-    public Worker(String workerId, TaskStore store, TaskQueue queue, Executor executor, long leaseTtlMs) {
+    public Worker(String workerId, TaskStore store, TaskQueue queue, Executor executor, long leaseTtlMs,HandlerRegistry registry) {
         this.workerId = Objects.requireNonNull(workerId, "workerId");
         this.store = Objects.requireNonNull(store, "store");
         this.queue = Objects.requireNonNull(queue, "queue");
         this.executor = Objects.requireNonNull(executor, "executor");
         this.leaseTtlMs = leaseTtlMs;
+        this.registry = registry;
     }
 
     public WorkerState state() {
@@ -57,6 +60,7 @@ public final class Worker implements Runnable{
                 DebugLog.log("Worker take taskId=%s queueSize=%d", taskId, queue.size());
 
                 long now = System.currentTimeMillis();
+                //该worker已被占用
                 state = WorkerState.RESERVED;
                 //获取期权
                 boolean leased = store.tryLease(taskId, workerId, now, leaseTtlMs);
@@ -70,7 +74,7 @@ public final class Worker implements Runnable{
                 state = WorkerState.SUBMITTED;
                 DebugLog.log("Worker submit TaskRunner taskId=%s", taskId);
                 //真正开始执行任务
-                executor.execute(new TaskRunner(taskId, store, workerId));
+                executor.execute(new TaskRunner(taskId, store, workerId, null));
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
                 break;

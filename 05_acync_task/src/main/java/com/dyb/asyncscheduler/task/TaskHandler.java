@@ -6,6 +6,5 @@
 package com.dyb.asyncscheduler.task;
 
 public interface TaskHandler {
-
-
+    TaskResult execute(TaskContext ctx) throws Exception;
 }

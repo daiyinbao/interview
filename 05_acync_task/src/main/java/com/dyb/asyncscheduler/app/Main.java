@@ -29,7 +29,7 @@ public final class Main {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
 
         //worker线程开启，一直监听queue
-        Worker worker = new Worker("worker-1", store, queue, executor, 5000L);
+        Worker worker = new Worker("worker-1", store, queue, executor, 5000L,null);
         Thread workerThread = new Thread(worker, "worker-1");
         workerThread.start();
 

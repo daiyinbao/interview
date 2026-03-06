@@ -43,6 +43,10 @@ public final class RetryPolicy {
         return Math.min(d,maxDelayMs);
     }
 
+    public long nextRunAtEpochMs(long nowMs, int attempt) {
+        return nowMs + nextDelayMs(attempt);
+    }
+
 
 
 }
