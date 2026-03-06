@@ -74,7 +74,7 @@ public final class Worker implements Runnable{
                 state = WorkerState.SUBMITTED;
                 DebugLog.log("Worker submit TaskRunner taskId=%s", taskId);
                 //真正开始执行任务
-                executor.execute(new TaskRunner(taskId, store, workerId, null));
+                executor.execute(new TaskRunner(taskId, store, workerId, registry));
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
                 break;

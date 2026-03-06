@@ -19,12 +19,15 @@ public final class Task {
     //分片键-->worker分片执行
     public final String shard;
 
+    public final int schemaVersion;
+    public final long timeoutMs;
+
     //任务的状态
     public volatile TaskState state;
     //任务的重试次数
     public volatile int attempt;
     //任务的最大重试次数
-    public volatile int  maxAttempts;
+    public volatile int maxAttempts;
 
     //调度时间控制-->延迟时间，超过该时间 则不会调度
     //任务在这个时间点之前，不能被调度执行
@@ -44,15 +47,28 @@ public final class Task {
     public volatile String lastError;
 
     //任务重试策略
-    public  final RetryPolicy retryPolicy;
+    public final RetryPolicy retryPolicy;
 
 
-    public Task(String taskId, String type, String payloadJson, String idempotencyKey, String shard,RetryPolicy retryPolicy) {
+    public Task(
+            String taskId,
+            String type,
+            String payloadJson,
+            String idempotencyKey,
+            String shard,
+            int schemaVersion,
+            long timeoutMs,
+            RetryPolicy retryPolicy
+    ) {
         this.taskId = taskId;
         this.type = type;
         this.payloadJson = payloadJson;
         this.idempotencyKey = idempotencyKey;
         this.shard = shard;
+
+        this.schemaVersion = schemaVersion;
+        this.timeoutMs = timeoutMs;
+        this.retryPolicy = retryPolicy;
 
         this.state = TaskState.NEW;
         this.attempt = 0;
@@ -66,7 +82,5 @@ public final class Task {
         this.leaseUntilEpochMs = 0L;
 
         this.lastError = null;
-
-        this.retryPolicy =retryPolicy;
     }
 }
