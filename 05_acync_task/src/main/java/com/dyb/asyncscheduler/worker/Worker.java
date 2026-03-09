@@ -57,8 +57,6 @@ public final class Worker implements Runnable{
                 state = WorkerState.IDLE;
                 //一直监听，当queue里面有任务开始执行
                 String taskId = queue.take();
-                DebugLog.log("Worker take taskId=%s queueSize=%d", taskId, queue.size());
-
                 long now = System.currentTimeMillis();
                 //该worker已被占用
                 state = WorkerState.RESERVED;
