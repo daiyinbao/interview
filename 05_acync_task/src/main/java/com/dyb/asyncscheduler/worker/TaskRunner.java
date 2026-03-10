@@ -46,6 +46,7 @@ public final class TaskRunner implements Runnable {
             Task t = store.get(taskId).orElseThrow();
             TaskHandler taskHandler = registry.get(t.getType());
             TaskContext taskContext = new TaskContext(t.getTaskId(), t.getType(), t.getPayloadJson(), t.attempt, t.shard);
+            Thread.sleep(2000);
             TaskResult taskResult = taskHandler.execute(taskContext);
 
             if(taskResult == null){

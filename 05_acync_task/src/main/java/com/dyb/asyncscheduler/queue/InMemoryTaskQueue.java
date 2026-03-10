@@ -56,7 +56,7 @@ public  final class InMemoryTaskQueue implements TaskQueue{
         if(nextRunAtEpochMs<= now){
             //取出任务
             boolean ok = ready.offer(taskId);
-            //提交任务被拒绝
+            //若队列已满，提交任务被拒绝
             if(!ok) offerRejectCount.incrementAndGet();
             return ok;
         }

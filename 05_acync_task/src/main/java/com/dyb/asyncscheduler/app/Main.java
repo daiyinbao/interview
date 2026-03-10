@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public final class Main {
     public static void main(String[] args) throws Exception {
         TaskStore store = new InMemoryTaskStore();
-        InMemoryTaskQueue queue = new InMemoryTaskQueue(3); // 刻意设小，制造背压
+        InMemoryTaskQueue queue = new InMemoryTaskQueue(1); // 刻意设小，制造背压
         HandlerRegistry registry = new HandlerRegistry();
 
         registry.register("TYPE_OK", ctx -> TaskResult.ok());
