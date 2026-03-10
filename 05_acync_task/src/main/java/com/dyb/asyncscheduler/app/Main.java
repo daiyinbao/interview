@@ -25,7 +25,7 @@ public final class Main {
 
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
 
-        Worker worker = new Worker("worker-1", store, queue, executor, 5000L, registry);
+        Worker worker = new Worker("worker-1", store, queue, executor, 5000L, registry,100);
         Thread workerThread = new Thread(worker, "worker-1");
         workerThread.start();
 
